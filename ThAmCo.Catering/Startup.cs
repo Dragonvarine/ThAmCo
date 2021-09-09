@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using ThAmCo.Catering.Data;
 
 namespace ThAmCo.Catering
 {
@@ -25,6 +27,9 @@ namespace ThAmCo.Catering
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<CateringDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CateringDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +40,15 @@ namespace ThAmCo.Catering
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=FoodBookings}/{action=Index}/{id?}");
+            });
         }
     }
 }
