@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ThAmCo.Catering.Models.MenuFoodItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Menu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodItem.FoodItemId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.MenuId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MenuFoodItemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MenuFoodItemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MenuFoodItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

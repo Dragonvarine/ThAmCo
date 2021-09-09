@@ -26,13 +26,84 @@ namespace ThAmCo.Catering.Migrations
 
                     b.Property<int>("ClientReferenceId");
 
-                    b.Property<int>("MenuId");
+                    b.Property<int>("MenuId")
+                        .HasMaxLength(2);
 
                     b.Property<int>("NumberOfGuests");
 
                     b.HasKey("FoodBookingId");
 
+                    b.HasIndex("MenuId");
+
                     b.ToTable("FoodBooking");
+                });
+
+            modelBuilder.Entity("ThAmCo.Catering.Models.FoodItem", b =>
+                {
+                    b.Property<int>("FoodItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<float>("UnitPrice");
+
+                    b.HasKey("FoodItemId");
+
+                    b.ToTable("FoodItem");
+                });
+
+            modelBuilder.Entity("ThAmCo.Catering.Models.Menu", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MenuName");
+
+                    b.HasKey("MenuId");
+
+                    b.ToTable("Menu");
+                });
+
+            modelBuilder.Entity("ThAmCo.Catering.Models.MenuFoodItem", b =>
+                {
+                    b.Property<int>("MenuFoodItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FoodItemId");
+
+                    b.Property<int>("MenuId");
+
+                    b.HasKey("MenuFoodItemId");
+
+                    b.HasIndex("FoodItemId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("MenuFoodItem");
+                });
+
+            modelBuilder.Entity("ThAmCo.Catering.Models.FoodBooking", b =>
+                {
+                    b.HasOne("ThAmCo.Catering.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ThAmCo.Catering.Models.MenuFoodItem", b =>
+                {
+                    b.HasOne("ThAmCo.Catering.Models.FoodItem", "FoodItem")
+                        .WithMany()
+                        .HasForeignKey("FoodItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ThAmCo.Catering.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

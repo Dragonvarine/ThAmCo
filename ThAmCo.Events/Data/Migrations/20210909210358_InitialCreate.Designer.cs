@@ -10,7 +10,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20181029103724_InitialCreate")]
+    [Migration("20210909210358_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace ThAmCo.Events.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("thamco.events")
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -42,10 +42,27 @@ namespace ThAmCo.Events.Data.Migrations
                     b.ToTable("Customers");
 
                     b.HasData(
-                        new { Id = 1, Email = "bob@example.com", FirstName = "Robert", Surname = "Robertson" },
-                        new { Id = 2, Email = "betty@example.com", FirstName = "Betty", Surname = "Thornton" },
-                        new { Id = 3, Email = "jin@example.com", FirstName = "Jin", Surname = "Jellybeans" }
-                    );
+                        new
+                        {
+                            Id = 1,
+                            Email = "bob@example.com",
+                            FirstName = "Robert",
+                            Surname = "Robertson"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "betty@example.com",
+                            FirstName = "Betty",
+                            Surname = "Thornton"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "jin@example.com",
+                            FirstName = "Jin",
+                            Surname = "Jellybeans"
+                        });
                 });
 
             modelBuilder.Entity("ThAmCo.Events.Data.Event", b =>
@@ -71,9 +88,22 @@ namespace ThAmCo.Events.Data.Migrations
                     b.ToTable("Events");
 
                     b.HasData(
-                        new { Id = 1, Date = new DateTime(2016, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), Duration = new TimeSpan(0, 6, 0, 0, 0), Title = "Bob's Big 50", TypeId = "PTY" },
-                        new { Id = 2, Date = new DateTime(2018, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Duration = new TimeSpan(0, 12, 0, 0, 0), Title = "Best Wedding Yet", TypeId = "WED" }
-                    );
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2020, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = new TimeSpan(0, 6, 0, 0, 0),
+                            Title = "Bob's Big 50",
+                            TypeId = "PTY"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2020, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = new TimeSpan(0, 12, 0, 0, 0),
+                            Title = "Best Wedding Yet",
+                            TypeId = "WED"
+                        });
                 });
 
             modelBuilder.Entity("ThAmCo.Events.Data.GuestBooking", b =>
@@ -91,11 +121,30 @@ namespace ThAmCo.Events.Data.Migrations
                     b.ToTable("Guests");
 
                     b.HasData(
-                        new { CustomerId = 1, EventId = 1, Attended = true },
-                        new { CustomerId = 2, EventId = 1, Attended = false },
-                        new { CustomerId = 1, EventId = 2, Attended = false },
-                        new { CustomerId = 3, EventId = 2, Attended = false }
-                    );
+                        new
+                        {
+                            CustomerId = 1,
+                            EventId = 1,
+                            Attended = true
+                        },
+                        new
+                        {
+                            CustomerId = 2,
+                            EventId = 1,
+                            Attended = false
+                        },
+                        new
+                        {
+                            CustomerId = 1,
+                            EventId = 2,
+                            Attended = false
+                        },
+                        new
+                        {
+                            CustomerId = 3,
+                            EventId = 2,
+                            Attended = false
+                        });
                 });
 
             modelBuilder.Entity("ThAmCo.Events.Data.GuestBooking", b =>

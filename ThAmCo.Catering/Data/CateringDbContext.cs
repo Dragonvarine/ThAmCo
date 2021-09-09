@@ -14,5 +14,8 @@ namespace ThAmCo.Catering.Data
         {
         }
         public DbSet<ThAmCo.Catering.Models.FoodBooking> FoodBooking { get; set; }
+        public DbSet<ThAmCo.Catering.Models.FoodItem> FoodItem { get; set; }
+        public DbSet<ThAmCo.Catering.Models.Menu> Menu { get; set; }
+        public DbSet<ThAmCo.Catering.Models.MenuFoodItem> MenuFoodItem { get; set; }
     }
 }

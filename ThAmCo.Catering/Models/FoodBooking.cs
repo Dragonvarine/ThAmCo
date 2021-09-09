@@ -16,5 +16,7 @@ namespace ThAmCo.Catering.Models
         public int NumberOfGuests { get; set; }
 
         public int MenuId { get; set; }
+
+        public virtual Menu Menu { get; set; }
     }
 }
